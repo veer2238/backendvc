@@ -43,4 +43,31 @@ app.get("/api/passport/:slug", async (req, res) => {
   }
 });
 
+app.get("/api/passport", async (req, res) => {
+  try {
+    const forms = await Passport.find({}, 'slug createdAt'); // only fetch slug & time
+    res.json(forms);
+  } catch (err) {
+    console.error("Fetch all error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Assuming you already have a Passport.js route
+
+app.delete("/api/passport/:slug", async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    const deleted = await Passport.findOneAndDelete({ slug });
+
+    if (!deleted) return res.status(404).json({ message: "Not found" });
+
+    res.json({ message: "Form deleted successfully" });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 export default app;
