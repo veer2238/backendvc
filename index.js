@@ -5,7 +5,10 @@ import dotenv from "dotenv";
 import Faq from './routes/Faq.js';
 import News from './routes/News.js';
 import Contact from './routes/Contact.js';
-import PassportRoutes from './routes/Passport.js';
+import Reminder from './routes/Reminder.js';
+import Login from './routes/Login.js';
+import Addcustomer from './routes/AddCustomer.js';
+import countryRoutes from "./routes/country.js"
 dotenv.config();
 const app = express();
 
@@ -29,7 +32,14 @@ app.get('/', (req, res) => {
 app.use('/',Faq)
 app.use('/', News);
 app.use('/',Contact)
-app.use('/', PassportRoutes);
+app.use('/', Login);
+app.use('/', Reminder); 
+app.use('/', Addcustomer);
+app.use("/", countryRoutes)
+
+
+// console.log(bcrypt.hashSync("Veer@0409", 10))
+
 
 // Start Server
 app.listen(4032, () => {
