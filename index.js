@@ -9,12 +9,16 @@ import Reminder from './routes/Reminder.js';
 import Login from './routes/Login.js';
 import Addcustomer from './routes/AddCustomer.js';
 import countryRoutes from "./routes/country.js"
+import path from "path"
+
 dotenv.config();
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
+
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")))
 
 
 const DB = process.env.MONGODB_URL;
